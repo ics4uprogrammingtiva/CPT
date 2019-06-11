@@ -1,6 +1,9 @@
 
 public class Card {
+	//int testCard = 1;
 	char cardType;
-	char suit;
+	public char suit;
 	String image;
+	
+	
 }
