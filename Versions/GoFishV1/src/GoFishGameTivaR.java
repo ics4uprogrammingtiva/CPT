@@ -287,38 +287,346 @@ public class GoFishGameTivaR {
 		btnAskForK.setBounds(604, 148, 89, 23);
 		frame.getContentPane().add(btnAskForK);
 		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Global Variables
+		// First step of the set up get the deck class to create a deck
+		// Known as complicated variables
+		Deck Pool = new Deck();
+		
+		// ArrayList for the deck
+		ArrayList <Card> cardDeck = new ArrayList <>();
+		
+		// Cards to remove
+		ArrayList <Card> cardsToRemove = new ArrayList<>();
+		
+		Pool.CreateDeck();
+		
+		// Set up player and computer 
+		Player P1 = new Player();
+		Player Com = new Player();
+		
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		// Button to start the game
 		JButton btnStartGame = new JButton("Start Game");
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Local variables
+				boolean isGameOver;
+				boolean checkPlayer;
+				int numberOfPlayerCards;
+				int numberOfComputerCards;
+				int deckSize;
 				
 				
-				//Disable the button
+				
+				//Disable the buttons
 				btnStartGame.setEnabled(false);
+				btnAskForA.setEnabled(false);
+				btnAskFor2.setEnabled(false);
+				btnAskFor3.setEnabled(false);
+				btnAskFor4.setEnabled(false);
+				btnAskFor5.setEnabled(false);
+				btnAskFor6.setEnabled(false);
+				btnAskFor7.setEnabled(false);
+				btnAskFor8.setEnabled(false);
+				btnAskFor9.setEnabled(false);
+				btnAskFor10.setEnabled(false);
+				btnAskForJ.setEnabled(false);
+				btnAskForQ.setEnabled(false);
+				btnAskForK.setEnabled(false);
+
+				System.out.println("Step one");
 				
-				// First step of the set up get the deck class to create a deck
 				
-				Deck Pool = new Deck();
-				
-				Card cardAH = new Card();
-				cardAH.testCard = 5;
-				//deck
-				// Second step of the set up
 				// Have player get their hand
 				for (int i = 0; i <= 7 ;i++)
 				{
+					deckSize = Pool.deck.size();
 					// Deal a card to the player's hand
+					Card newCard = Pool.GivePlayerCard(deckSize);
+					System.out.println("Original cards:" + newCard.GetCardType());
+					P1.hand.add(newCard);
+					
+					
 				}
 				
 				// Then have computer get their hand
+				for (int i = 0; i <= 6 ;i++)
+				{
+					deckSize = Pool.deck.size();
+					// Deal a card to the computer's hand
+					Card newCard = Pool.GivePlayerCard(deckSize);
+					
+					Com.hand.add(newCard);
+					
+				}
 				
 				// Then have an end turn button to do everthing until the end of the game 
 				
 				/// IMPORTANT NEVER DISPLAY THE CARDS BEFORE THE GAME HAS CHECKED FOR DOUBLES
+				
+				
+				// Look up array list boolean contains
+				
+				System.out.println("Step two");
+				///////// DOUBLES
 				// Check for doubles for player
-				// check for doubles for computer
-				// display cards in player's hand
+				numberOfPlayerCards = (P1.hand.size());
+				checkPlayer = true;
+					Card cardX;
+					Card cardY;
+					char typeX;
+					char typeY;
+					
+					System.out.println("Hand size" + P1.hand.size());
+					
+					// Problem is in this loop I'm going to look at how I did it for bubble sort
+					//
+					//
+					///
+					///
+					///
+					////
+					////
+					////
+					////
+					/////
+					///
+					////
+					
+					for (int x = 0; x < numberOfPlayerCards; x++)
+					{
+						System.out.println("Step two point one");
+						cardX = P1.hand.get(x);
+						
+						for(int y = 1; y < numberOfPlayerCards; y++)
+						{
+							System.out.println("Step two point ");
+							cardY = P1.hand.get(x);
+							
+							// To compare types
+							typeX = cardX.GetCardType();
+							System.out.println("typeX:" + typeX);
+							typeY = cardY.GetCardType();
+							System.out.println("typeY:" + typeY);
+							if (typeX == typeY)
+							{
+								P1.points = (P1.points +1);
+								
+								System.out.println("Step two point 4");
+								// Discard both cards
+								P1.hand.remove(x);
+								P1.hand.remove(y);
+								//numberOfPlayerCards = (numberOfPlayerCards -1);
+								
+								// Disable the option for selecting the card to ask for
+								if (typeX == 'A')
+								{
+									btnAskForA.setEnabled(false);
+									cardSlotA.setVisible(false);
 
+								}
+								else if (typeX == '2')
+								{
+									btnAskFor2.setEnabled(false);
+									cardSlot2.setVisible(false);
+								}
+								else if (typeX == '3')
+								{
+									btnAskFor3.setEnabled(false);
+									cardSlot3.setVisible(false);
+								}
+								else if (typeX == '4')
+								{
+									btnAskFor4.setEnabled(false);
+									cardSlot4.setVisible(false);
+								}
+								else if (typeX == '5')
+								{
+									btnAskFor5.setEnabled(false);
+									cardSlot5.setVisible(false);
+								}
+								else if (typeX == '6')
+								{
+									btnAskFor6.setEnabled(false);
+									cardSlot6.setVisible(false);
+								}
+								else if (typeX == '7')
+								{
+									btnAskFor7.setEnabled(false);
+									cardSlot7.setVisible(false);
+								}
+								else if (typeX == '8')
+								{
+									btnAskFor8.setEnabled(false);
+									cardSlot8.setVisible(false);
+								}
+								else if (typeX == '9')
+								{
+									btnAskFor9.setEnabled(false);
+									cardSlot9.setVisible(false);
+								}
+								else if (typeX == '0')
+								{
+									btnAskFor10.setEnabled(false);
+									cardSlot10.setVisible(false);
+								}
+								else if (typeX == 'J')
+								{
+									btnAskForJ.setEnabled(false);
+									cardSlotJ.setVisible(false);
+								}
+								else if (typeX == 'Q')
+								{
+									btnAskForQ.setEnabled(false);
+									cardSlotQ.setVisible(false);
+								}
+								else if (typeX == 'K')
+								{
+									btnAskForK.setEnabled(false);
+									cardSlotK.setVisible(false);
+								}
+								
+								
+								
+							}
+							numberOfPlayerCards = (P1.hand.size());	
+							System.out.println("Hand size" + P1.hand.size());
+						}
+					}
+					
+				
+				// Check for double end 
+				
+				// check for doubles for computer
+					System.out.println("Step three");
+			///////// DOUBLES
+				// Check for doubles for player
+				numberOfComputerCards = Com.hand.size();
+					Card cardR;
+					Card cardZ;
+					for (int r = 0; r < numberOfComputerCards; r++)
+					{
+							
+						cardR = Com.hand.get(r);
+							
+						for(int z = 0; z < numberOfComputerCards; z++)
+						{
+							cardZ = Com.hand.get(z);
+							
+							if (cardR.GetCardType() == cardZ.GetCardType())
+							{
+								Com.points = (P1.points +1);
+									
+								// Discard both cards
+								Com.hand.remove(r);
+								Com.hand.remove(z);	
+									
+							}
+										
+						}
+					}
+						
+					
+					// Check for double end
+				
+				// display cards in player's hand
+					System.out.println("Step four");
+				
+				for (int i = 0; i< numberOfPlayerCards; i++)
+				{
+					Card currentDisplayCard;
+					char currentDisplayType;
+					String currentImage;
+					currentDisplayCard = P1.hand.get(i);
+					
+					currentDisplayType = currentDisplayCard.GetCardType();
+					currentImage = currentDisplayCard.GetImage();
+					
+					if (currentDisplayType == 'A')
+					{
+						cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskForA.setEnabled(true);
+						cardSlotA.setVisible(true);
+					}
+					else if (currentDisplayType == '2')
+					{
+						cardSlot2.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor2.setEnabled(true);
+						cardSlot2.setVisible(true);
+					}
+					else if (currentDisplayType == '3')
+					{
+						cardSlot3.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor3.setEnabled(true);
+						cardSlot3.setVisible(true);
+					}
+					else if (currentDisplayType == '4')
+					{
+						cardSlot4.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor4.setEnabled(true);
+						cardSlot4.setVisible(true);
+					}
+					else if (currentDisplayType == '5')
+					{
+						cardSlot5.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor5.setEnabled(true);
+						cardSlot5.setVisible(true);
+					}
+					else if (currentDisplayType == '6')
+					{
+						cardSlot6.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor6.setEnabled(true);
+						cardSlot6.setVisible(true);
+					}
+					else if (currentDisplayType == '7')
+					{
+						cardSlot7.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor7.setEnabled(true);
+						cardSlot7.setVisible(true);
+					}
+					else if (currentDisplayType == '8')
+					{
+						cardSlot8.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor8.setEnabled(true);
+						cardSlot8.setVisible(true);
+					}
+					else if (currentDisplayType == '9')
+					{
+						cardSlot9.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor9.setEnabled(true);
+						cardSlot9.setVisible(true);
+					}
+					else if (currentDisplayType == '0')
+					{
+						cardSlot10.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskFor10.setEnabled(true);
+						cardSlot10.setVisible(true);
+					}
+					else if (currentDisplayType == 'J')
+					{
+						cardSlotJ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskForJ.setEnabled(true);
+						cardSlotJ.setVisible(true);
+					}
+					else if (currentDisplayType == 'Q')
+					{
+						cardSlotQ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskForQ.setEnabled(true);
+						cardSlotQ.setVisible(true);
+					}
+					else if (currentDisplayType == 'K')
+					{
+						cardSlotK.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+						btnAskForK.setEnabled(true);
+						cardSlotK.setVisible(true);
+					}
+					
+					System.out.println("I finished");
+					
+				}
+					
 			}
 		});
 		btnStartGame.setBounds(10, 11, 124, 23);
@@ -348,6 +656,7 @@ public class GoFishGameTivaR {
 				// If user has zero cards call end game function (See above)
 				
 				// Allow player to select a card from their hand 
+				// Enable all of the buttons of cards currently in the users hand
 				
 				// If computer hand has a card type of the same then add card to player's hand
 				
@@ -358,8 +667,8 @@ public class GoFishGameTivaR {
 		});
 		btnEndTurn.setBounds(10, 557, 124, 23);
 		frame.getContentPane().add(btnEndTurn);
-
 		
+
 	}
 }
 
