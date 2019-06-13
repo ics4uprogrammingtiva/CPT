@@ -297,7 +297,7 @@ public class GoFishGameTivaR {
 		ArrayList <Card> cardDeck = new ArrayList <>();
 		
 		// Cards to remove
-		ArrayList <Card> cardsToRemove = new ArrayList<>();
+		ArrayList <Character> cardTypes = new ArrayList<>();
 		
 		Pool.CreateDeck();
 		
@@ -314,6 +314,8 @@ public class GoFishGameTivaR {
 				// Local variables
 				boolean isGameOver;
 				boolean checkPlayer;
+				boolean startOver;
+				boolean justDidTwoCards = false;
 				int numberOfPlayerCards;
 				int numberOfComputerCards;
 				int deckSize;
@@ -378,38 +380,157 @@ public class GoFishGameTivaR {
 					Card cardY;
 					char typeX;
 					char typeY;
+					int x = -1;
+					int y = 0;
 					
 					System.out.println("Hand size" + P1.hand.size());
 					
-					// Problem is in this loop I'm going to look at how I did it for bubble sort
-					//
-					//
-					///
-					///
-					///
+					///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					////////////////////////////Still broken
+				
 					////
-					////
-					////
-					////
-					/////
-					///
-					// My idea go backwards through the list searching for the first occurance of a number...
-					// If the number is equal to itself then do nothing if it finds a different instance then delete both of them
-					for (int topOfList = numberOfPlayerCards; numberOfPlayerCards> topOfList; topOfList--)
+					while (checkPlayer == true)
 					{
+						System.out.println("Inside the loop");
+
+						x = x+1;
+						y = 0;
+						y = x+1;
+						System.out.println("X is " +x);
+						System.out.println("Number of player cards: " + numberOfPlayerCards);
+						System.out.println("y =" + y);
+						while (y <= (numberOfPlayerCards-1))
+						{
+							if (justDidTwoCards == false)
+							{
+								cardX = P1.hand.get(x);
+								cardY = P1.hand.get(y);
+								typeX = cardX.GetCardType();
+								System.out.println("typeX:" + typeX);
+								typeY = cardY.GetCardType();
+								System.out.println("typeY:" + typeY);
+								
+								
+								if (typeX == typeY)
+								{
+									P1.points = (P1.points +1);
+									
+									System.out.println("There are two of these cards");
+									// Discard both cards
+									P1.hand.remove(x);
+									P1.hand.remove(y);
+									P1.hand.trimToSize();
+									numberOfPlayerCards = numberOfPlayerCards -1;
+									System.out.println("Hand size" + P1.hand.size());
+									
+									// Disable the option for selecting the card to ask for
+									if (typeX == 'A')
+									{
+										btnAskForA.setEnabled(false);
+										cardSlotA.setVisible(false);
+
+									}
+									else if (typeX == '2')
+									{
+										btnAskFor2.setEnabled(false);
+										cardSlot2.setVisible(false);
+									}
+									else if (typeX == '3')
+									{
+										btnAskFor3.setEnabled(false);
+										cardSlot3.setVisible(false);
+									}
+									else if (typeX == '4')
+									{
+										btnAskFor4.setEnabled(false);
+										cardSlot4.setVisible(false);
+									}
+									else if (typeX == '5')
+									{
+										btnAskFor5.setEnabled(false);
+										cardSlot5.setVisible(false);
+									}
+									else if (typeX == '6')
+									{
+										btnAskFor6.setEnabled(false);
+										cardSlot6.setVisible(false);
+									}
+									else if (typeX == '7')
+									{
+										btnAskFor7.setEnabled(false);
+										cardSlot7.setVisible(false);
+									}
+									else if (typeX == '8')
+									{
+										btnAskFor8.setEnabled(false);
+										cardSlot8.setVisible(false);
+									}
+									else if (typeX == '9')
+									{
+										btnAskFor9.setEnabled(false);
+										cardSlot9.setVisible(false);
+									}
+									else if (typeX == '0')
+									{
+										btnAskFor10.setEnabled(false);
+										cardSlot10.setVisible(false);
+									}
+									else if (typeX == 'J')
+									{
+										btnAskForJ.setEnabled(false);
+										cardSlotJ.setVisible(false);
+									}
+									else if (typeX == 'Q')
+									{
+										btnAskForQ.setEnabled(false);
+										cardSlotQ.setVisible(false);
+									}
+									else if (typeX == 'K')
+									{
+										btnAskForK.setEnabled(false);
+										cardSlotK.setVisible(false);
+									}
+									// Need to make sure it still works
+									System.out.println("I continue to work after two cards");
+										justDidTwoCards = true;
+
+								}
+							
+
+							}
+							if (x > numberOfPlayerCards-1)
+							{
+								checkPlayer = false;
+							}
+							if (y >= numberOfPlayerCards-1)
+							{
+								//checkPlayer = false;
+								System.out.println("Help");
+							}
+
+							y= y+1;
+						}
+						
+						justDidTwoCards = false;
+						if (x > numberOfPlayerCards-1)
+						{
+							checkPlayer = false;
+						}
 						
 					}
-					////
-					/*
-					for (int x = 0; x < numberOfPlayerCards; x++)
+					
+					System.out.println("Player points:" + P1.points);
+/*
+					while (checkPlayer == false)
 					{
+						
 						System.out.println("Step two point one");
 						cardX = P1.hand.get(x);
 						
 						for(int y = 1; y < numberOfPlayerCards; y++)
 						{
 							System.out.println("Step two point ");
-							cardY = P1.hand.get(x);
+							cardY = P1.hand.get(y);
 							
 							// To compare types
 							typeX = cardX.GetCardType();
@@ -425,6 +546,10 @@ public class GoFishGameTivaR {
 								P1.hand.remove(x);
 								P1.hand.remove(y);
 								//numberOfPlayerCards = (numberOfPlayerCards -1);
+								
+								// Reset Them
+								x= -1;
+								y = 0;
 								
 								// Disable the option for selecting the card to ask for
 								if (typeX == 'A')
@@ -494,15 +619,15 @@ public class GoFishGameTivaR {
 									cardSlotK.setVisible(false);
 								}
 								
-								
+								cardX = P1.hand.get(x);
+								cardY = P1.hand.get(y);
 								
 							}
 							numberOfPlayerCards = (P1.hand.size());	
 							System.out.println("Hand size" + P1.hand.size());
 						}
 					}
-					
-				*/
+					*/
 				// Check for double end 
 				
 				// check for doubles for computer
