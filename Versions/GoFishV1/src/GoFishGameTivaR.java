@@ -393,8 +393,14 @@ public class GoFishGameTivaR {
 					////
 					/////
 					///
+					// My idea go backwards through the list searching for the first occurance of a number...
+					// If the number is equal to itself then do nothing if it finds a different instance then delete both of them
+					for (int topOfList = numberOfPlayerCards; numberOfPlayerCards> topOfList; topOfList--)
+					{
+						
+					}
 					////
-					
+					/*
 					for (int x = 0; x < numberOfPlayerCards; x++)
 					{
 						System.out.println("Step two point one");
@@ -496,7 +502,7 @@ public class GoFishGameTivaR {
 						}
 					}
 					
-				
+				*/
 				// Check for double end 
 				
 				// check for doubles for computer
