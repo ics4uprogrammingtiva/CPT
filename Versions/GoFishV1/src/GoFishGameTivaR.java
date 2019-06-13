@@ -297,7 +297,9 @@ public class GoFishGameTivaR {
 		ArrayList <Card> cardDeck = new ArrayList <>();
 		
 		// Cards to remove
-		ArrayList <Character> cardTypes = new ArrayList<>();
+		ArrayList <Card> cardsToRemove = new ArrayList<>();
+		
+		ArrayList <Character> cardTypes = new ArrayList();
 		
 		Pool.CreateDeck();
 		
@@ -342,7 +344,7 @@ public class GoFishGameTivaR {
 				
 				
 				// Have player get their hand
-				for (int i = 0; i <= 7 ;i++)
+				for (int i = 0; i <= 6 ;i++)
 				{
 					deckSize = Pool.deck.size();
 					// Deal a card to the player's hand
@@ -417,82 +419,89 @@ public class GoFishGameTivaR {
 									
 									System.out.println("There are two of these cards");
 									// Discard both cards
-									P1.hand.remove(x);
-									P1.hand.remove(y);
-									P1.hand.trimToSize();
-									numberOfPlayerCards = numberOfPlayerCards -1;
-									System.out.println("Hand size" + P1.hand.size());
-									
-									// Disable the option for selecting the card to ask for
-									if (typeX == 'A')
+									// This is so that it doesn't add three types of the same card
+									if (!cardTypes.contains(typeX))
 									{
-										btnAskForA.setEnabled(false);
-										cardSlotA.setVisible(false);
+										cardsToRemove.add(P1.hand.get(x));
+										cardsToRemove.add(P1.hand.get(y));
+										cardTypes.add(typeX);
+										cardTypes.add(typeY);
+										P1.hand.trimToSize();
+										numberOfPlayerCards = numberOfPlayerCards -1;
+										System.out.println("Hand size" + P1.hand.size());
+										
+										// Disable the option for selecting the card to ask for
+										if (typeX == 'A')
+										{
+											btnAskForA.setEnabled(false);
+											cardSlotA.setVisible(false);
 
+										}
+										else if (typeX == '2')
+										{
+											btnAskFor2.setEnabled(false);
+											cardSlot2.setVisible(false);
+										}
+										else if (typeX == '3')
+										{
+											btnAskFor3.setEnabled(false);
+											cardSlot3.setVisible(false);
+										}
+										else if (typeX == '4')
+										{
+											btnAskFor4.setEnabled(false);
+											cardSlot4.setVisible(false);
+										}
+										else if (typeX == '5')
+										{
+											btnAskFor5.setEnabled(false);
+											cardSlot5.setVisible(false);
+										}
+										else if (typeX == '6')
+										{
+											btnAskFor6.setEnabled(false);
+											cardSlot6.setVisible(false);
+										}
+										else if (typeX == '7')
+										{
+											btnAskFor7.setEnabled(false);
+											cardSlot7.setVisible(false);
+										}
+										else if (typeX == '8')
+										{
+											btnAskFor8.setEnabled(false);
+											cardSlot8.setVisible(false);
+										}
+										else if (typeX == '9')
+										{
+											btnAskFor9.setEnabled(false);
+											cardSlot9.setVisible(false);
+										}
+										else if (typeX == '0')
+										{
+											btnAskFor10.setEnabled(false);
+											cardSlot10.setVisible(false);
+										}
+										else if (typeX == 'J')
+										{
+											btnAskForJ.setEnabled(false);
+											cardSlotJ.setVisible(false);
+										}
+										else if (typeX == 'Q')
+										{
+											btnAskForQ.setEnabled(false);
+											cardSlotQ.setVisible(false);
+										}
+										else if (typeX == 'K')
+										{
+											btnAskForK.setEnabled(false);
+											cardSlotK.setVisible(false);
+										}
+										// Need to make sure it still works
+										System.out.println("I continue to work after two cards");
+											justDidTwoCards = true;
 									}
-									else if (typeX == '2')
-									{
-										btnAskFor2.setEnabled(false);
-										cardSlot2.setVisible(false);
-									}
-									else if (typeX == '3')
-									{
-										btnAskFor3.setEnabled(false);
-										cardSlot3.setVisible(false);
-									}
-									else if (typeX == '4')
-									{
-										btnAskFor4.setEnabled(false);
-										cardSlot4.setVisible(false);
-									}
-									else if (typeX == '5')
-									{
-										btnAskFor5.setEnabled(false);
-										cardSlot5.setVisible(false);
-									}
-									else if (typeX == '6')
-									{
-										btnAskFor6.setEnabled(false);
-										cardSlot6.setVisible(false);
-									}
-									else if (typeX == '7')
-									{
-										btnAskFor7.setEnabled(false);
-										cardSlot7.setVisible(false);
-									}
-									else if (typeX == '8')
-									{
-										btnAskFor8.setEnabled(false);
-										cardSlot8.setVisible(false);
-									}
-									else if (typeX == '9')
-									{
-										btnAskFor9.setEnabled(false);
-										cardSlot9.setVisible(false);
-									}
-									else if (typeX == '0')
-									{
-										btnAskFor10.setEnabled(false);
-										cardSlot10.setVisible(false);
-									}
-									else if (typeX == 'J')
-									{
-										btnAskForJ.setEnabled(false);
-										cardSlotJ.setVisible(false);
-									}
-									else if (typeX == 'Q')
-									{
-										btnAskForQ.setEnabled(false);
-										cardSlotQ.setVisible(false);
-									}
-									else if (typeX == 'K')
-									{
-										btnAskForK.setEnabled(false);
-										cardSlotK.setVisible(false);
-									}
-									// Need to make sure it still works
-									System.out.println("I continue to work after two cards");
-										justDidTwoCards = true;
+									
 
 								}
 							
@@ -519,149 +528,14 @@ public class GoFishGameTivaR {
 						
 					}
 					
+					P1.hand.removeAll(cardsToRemove);
+					cardsToRemove.clear();
+					cardsToRemove.clear();
 					System.out.println("Player points:" + P1.points);
-/*
-					while (checkPlayer == false)
-					{
-						
-						System.out.println("Step two point one");
-						cardX = P1.hand.get(x);
-						
-						for(int y = 1; y < numberOfPlayerCards; y++)
-						{
-							System.out.println("Step two point ");
-							cardY = P1.hand.get(y);
-							
-							// To compare types
-							typeX = cardX.GetCardType();
-							System.out.println("typeX:" + typeX);
-							typeY = cardY.GetCardType();
-							System.out.println("typeY:" + typeY);
-							if (typeX == typeY)
-							{
-								P1.points = (P1.points +1);
-								
-								System.out.println("Step two point 4");
-								// Discard both cards
-								P1.hand.remove(x);
-								P1.hand.remove(y);
-								//numberOfPlayerCards = (numberOfPlayerCards -1);
-								
-								// Reset Them
-								x= -1;
-								y = 0;
-								
-								// Disable the option for selecting the card to ask for
-								if (typeX == 'A')
-								{
-									btnAskForA.setEnabled(false);
-									cardSlotA.setVisible(false);
-
-								}
-								else if (typeX == '2')
-								{
-									btnAskFor2.setEnabled(false);
-									cardSlot2.setVisible(false);
-								}
-								else if (typeX == '3')
-								{
-									btnAskFor3.setEnabled(false);
-									cardSlot3.setVisible(false);
-								}
-								else if (typeX == '4')
-								{
-									btnAskFor4.setEnabled(false);
-									cardSlot4.setVisible(false);
-								}
-								else if (typeX == '5')
-								{
-									btnAskFor5.setEnabled(false);
-									cardSlot5.setVisible(false);
-								}
-								else if (typeX == '6')
-								{
-									btnAskFor6.setEnabled(false);
-									cardSlot6.setVisible(false);
-								}
-								else if (typeX == '7')
-								{
-									btnAskFor7.setEnabled(false);
-									cardSlot7.setVisible(false);
-								}
-								else if (typeX == '8')
-								{
-									btnAskFor8.setEnabled(false);
-									cardSlot8.setVisible(false);
-								}
-								else if (typeX == '9')
-								{
-									btnAskFor9.setEnabled(false);
-									cardSlot9.setVisible(false);
-								}
-								else if (typeX == '0')
-								{
-									btnAskFor10.setEnabled(false);
-									cardSlot10.setVisible(false);
-								}
-								else if (typeX == 'J')
-								{
-									btnAskForJ.setEnabled(false);
-									cardSlotJ.setVisible(false);
-								}
-								else if (typeX == 'Q')
-								{
-									btnAskForQ.setEnabled(false);
-									cardSlotQ.setVisible(false);
-								}
-								else if (typeX == 'K')
-								{
-									btnAskForK.setEnabled(false);
-									cardSlotK.setVisible(false);
-								}
-								
-								cardX = P1.hand.get(x);
-								cardY = P1.hand.get(y);
-								
-							}
-							numberOfPlayerCards = (P1.hand.size());	
-							System.out.println("Hand size" + P1.hand.size());
-						}
-					}
-					*/
-				// Check for double end 
-				
-				// check for doubles for computer
-					System.out.println("Step three");
-			///////// DOUBLES
-				// Check for doubles for player
-				numberOfComputerCards = Com.hand.size();
-					Card cardR;
-					Card cardZ;
-					for (int r = 0; r < numberOfComputerCards; r++)
-					{
-							
-						cardR = Com.hand.get(r);
-							
-						for(int z = 0; z < numberOfComputerCards; z++)
-						{
-							cardZ = Com.hand.get(z);
-							
-							if (cardR.GetCardType() == cardZ.GetCardType())
-							{
-								Com.points = (P1.points +1);
-									
-								// Discard both cards
-								Com.hand.remove(r);
-								Com.hand.remove(z);	
-									
-							}
-										
-						}
-					}
-						
 					
-					// Check for double end
-				
+				// Check the computers hand 
+					
+					
 				// display cards in player's hand
 					System.out.println("Step four");
 				
@@ -799,7 +673,15 @@ public class GoFishGameTivaR {
 		btnEndTurn.setBounds(10, 557, 124, 23);
 		frame.getContentPane().add(btnEndTurn);
 		
+		
 
+	}
+	
+	public static int CheckP1Doubles()
+	{
+		int playerPoints = 0;
+		
+		return (playerPoints);
 	}
 }
 
