@@ -13,14 +13,6 @@ public class Player {
 	
 	
 	
-	/*
-	// Make one to check how many cards the player has
-	public CheckForDoubles()
-	{
-		boolean isGameOver;
-		isGameOver = hand.isEmpty();
-		return(isGameOver);
-	}
-	*/
+	
 
 }
