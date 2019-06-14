@@ -56,12 +56,11 @@ Deck Pool = new Deck();
 // ArrayList for the deck
 ArrayList <Card> cardDeck = new ArrayList <>();
 
+// Arrays
 // Cards to remove
 ArrayList <Card> cardsToRemove = new ArrayList<>();
 
 ArrayList <Character> cardTypes = new ArrayList();
-
-
 
 // Set up player and computer 
 Player P1 = new Player();
@@ -108,6 +107,8 @@ Player Com = new Player();
 		JLabel cardSlotK = new JLabel();
 		JButton btnAskForK = new JButton("Ask For King");
 		
+		JLabel lblComputerActions = new JLabel("Computer's Actions");
+		
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -130,7 +131,7 @@ Player Com = new Player();
 		cardSlotA.setBounds(10, 79, 89, 112);
 		cardSlotA.setHorizontalAlignment(SwingConstants.CENTER);
 		// This is going to be put in the location of where the image is displayed 
-		cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("src/CardsVF/AC.jpg")));
+		//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("src/CardsVF/AC.jpg")));
 		frame.getContentPane().add(cardSlotA);
 		
 		btnAskForA.addActionListener(new ActionListener() {
@@ -348,7 +349,10 @@ Player Com = new Player();
 		btnAskForK.setBounds(604, 148, 89, 23);
 		frame.getContentPane().add(btnAskForK);
 		
-		
+
+		lblComputerActions.setVisible(false);
+		lblComputerActions.setBounds(604, 48, 263, 14);
+		frame.getContentPane().add(lblComputerActions);
 		
 		// Button to start the game
 		JButton btnStartGame = new JButton("Start Game");
@@ -425,7 +429,7 @@ Player Com = new Player();
 				Com.points = CheckComDoubles();
 					
 				// Display Players cards 
-				//DisplayPlayerCards();
+				DisplayPlayerCards();
 				
 					
 			}
@@ -437,41 +441,82 @@ Player Com = new Player();
 		btnEndTurn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Variables
+				// For computer turn
+				char computerAskCardType;
+				int computerHandSize;
+				Card computerAskCard;
+				Card compareToPlayerCard;
+				char compareToPlayerCardType;
 				
-				// If the user has zero cards then call the end game funtion
+				// For player turn
+				
+				// If the user has zero cards then call the end game function
+				// End game function ends the game disables buttons and checks to see who wins
 				if (Com.points == 0)
 				{
+					CountPoints();
+				}
+				else if (P1.points == 0)
+				{
+					CountPoints();
+				}
+				else
+				{
+					// Else
+					//  Do the computers turn first and then do the users things and repeat for each turn
+					
+					// Have computer select a card from their hand then check against the P1.hand card types
+					computerHandSize = Com.hand.size();
+					computerAskCard = Com.SelectARandomCardToAskFor(computerHandSize);
+					
+					// Get card type
+					computerAskCardType = computerAskCard.GetCardType();
+					lblComputerActions.setText("The computer has asked for a " + computerAskCardType);
+					
+					// If the playerHand has a card type of the same then remove card from player's hand and add it to computer
+					for (int c = 0; c <= P1.hand.size(); c++)
+					{
+						// Variables for loop
+						compareToPlayerCard = P1.hand.get(c);
+						compareToPlayerCardType = compareToPlayerCard.GetCardType();
+						
+						// check if the type is the same
+						if (computerAskCardType == compareToPlayerCardType)
+						{
+							Com.hand.add(P1.hand.get(c));
+							cardsToRemove.add(P1.hand.get(c));
+						}
+						// HERE
+						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						
+					}
+					
+					// If player's hand doesn't have card then add card from deck
+					
+					// Check for doubles of any card type
+					
+					// after
+					
+					// If user has zero cards call end game function (See above)
+					
+					// Allow player to select a card from their hand 
+					// Enable all of the buttons of cards currently in the users hand
+					
+					// If computer hand has a card type of the same then add card to player's hand
+					
+					// If computer's hand  doesn't have card then add card from deck
+					
 					
 				}
-				// End game function ends the game disables buttons and checks to see who wins
 				
-				// Else
-				//  Do the computers turn first and then do the users things and repeat for each turn
 				
-				// Randomly select a card type from computer's hand
 				
-				// If the playerHand has a card type of the same then remove card from player's hand and add it to computer
-				
-				// If player's hand doesn't have card then add card from deck
-				
-				// Check for doubles of any card type
-				
-				// after
-				
-				// If user has zero cards call end game function (See above)
-				
-				// Allow player to select a card from their hand 
-				// Enable all of the buttons of cards currently in the users hand
-				
-				// If computer hand has a card type of the same then add card to player's hand
-				
-				// If computer's hand  doesn't have card then add card from deck
-				
-				// If 
 			}
 		});
 		btnEndTurn.setBounds(10, 557, 124, 23);
 		frame.getContentPane().add(btnEndTurn);
+		
+		
 
 	}
 	
@@ -497,11 +542,13 @@ Player Com = new Player();
 			int y = 0;
 			
 			System.out.println("Hand size" + P1.hand.size());
-			
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			////////////////////////////Still broken
-		
 			////
+			
+			// Clear arrays 
+			cardsToRemove.clear();
+			cardTypes.clear();
+			
+			
 			while (checkPlayer == true)
 			{
 				System.out.println("Inside the loop");
@@ -669,6 +716,10 @@ Player Com = new Player();
 			int y = 0;
 			
 			System.out.println("Hand size" + Com.hand.size());
+			
+			// Clear arrays 
+			cardsToRemove.clear();
+			cardTypes.clear();
 		
 			////
 			while (checkPlayer == true)
@@ -742,7 +793,6 @@ Player Com = new Player();
 			
 			P1.hand.removeAll(cardsToRemove);
 			cardsToRemove.clear();
-			cardsToRemove.clear();
 			System.out.println("Computer points:" + computerPoints);
 		
 		return (computerPoints);
@@ -769,93 +819,107 @@ Player Com = new Player();
 		
 		if (currentDisplayType == 'A')
 		{
-			cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForA.setEnabled(true);
 			cardSlotA.setVisible(true);
 		}
 		else if (currentDisplayType == '2')
 		{
-			cardSlot2.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot2.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor2.setEnabled(true);
 			cardSlot2.setVisible(true);
 		}
 		else if (currentDisplayType == '3')
 		{
-			cardSlot3.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot3.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor3.setEnabled(true);
 			cardSlot3.setVisible(true);
 		}
 		else if (currentDisplayType == '4')
 		{
-			cardSlot4.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot4.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor4.setEnabled(true);
 			cardSlot4.setVisible(true);
 		}
 		else if (currentDisplayType == '5')
 		{
-			cardSlot5.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot5.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor5.setEnabled(true);
 			cardSlot5.setVisible(true);
 		}
 		else if (currentDisplayType == '6')
 		{
-			cardSlot6.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot6.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor6.setEnabled(true);
 			cardSlot6.setVisible(true);
 		}
 		else if (currentDisplayType == '7')
 		{
-			cardSlot7.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot7.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor7.setEnabled(true);
 			cardSlot7.setVisible(true);
 		}
 		else if (currentDisplayType == '8')
 		{
-			cardSlot8.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot8.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor8.setEnabled(true);
 			cardSlot8.setVisible(true);
 		}
 		else if (currentDisplayType == '9')
 		{
-			cardSlot9.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot9.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor9.setEnabled(true);
 			cardSlot9.setVisible(true);
 		}
 		else if (currentDisplayType == '0')
 		{
-			cardSlot10.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlot10.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor10.setEnabled(true);
 			cardSlot10.setVisible(true);
 		}
 		else if (currentDisplayType == 'J')
 		{
-			cardSlotJ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlotJ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForJ.setEnabled(true);
 			cardSlotJ.setVisible(true);
 		}
 		else if (currentDisplayType == 'Q')
 		{
-			cardSlotQ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlotQ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForQ.setEnabled(true);
 			cardSlotQ.setVisible(true);
 		}
 		else if (currentDisplayType == 'K')
 		{
-			cardSlotK.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			//cardSlotK.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForK.setEnabled(true);
 			cardSlotK.setVisible(true);
 		}
 		
-		System.out.println("I finished");
+
 		
 	}
 	}
 	
-	public void ComputerWins()
+	public void CountPoints()
 	{
-		
+		// Disable all buttons 
+		if (Com.points> P1.points)
+		{
+			System.out.println("Computer Wins!");
+			lblComputerActions.setText("The computer has won.");
+
+		}
+		else if (P1.points > Com.points)
+		{
+			System.out.println("player Wins!");
+			lblComputerActions.setText("You have won.");
+		}
+		else
+		{
+			System.out.println("It's a tie!");
+			lblComputerActions.setText("You both tied.");
+		}
 	}
-	
-	
 }
 
