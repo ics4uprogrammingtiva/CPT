@@ -16,10 +16,10 @@ public class Player {
 	{
 		int handSize = computerHandSize;
 		int randomNumber = (int) ((Math.random()*handSize) - 0);
-		
+
 		Card computerAskCard = hand.get(randomNumber);
 		
-		hand.remove(randomNumber);
+		//hand.remove(randomNumber);
 		
 		return (computerAskCard);
 	}

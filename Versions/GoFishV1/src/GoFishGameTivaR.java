@@ -489,12 +489,6 @@ boolean playerPickedCard = false;
 		btnStartGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Local variables
-				boolean isGameOver;
-				boolean checkPlayer;
-				boolean startOver;
-				boolean justDidTwoCards = false;
-				int numberOfPlayerCards;
-				int numberOfComputerCards;
 				int deckSize;
 				
 				
@@ -625,13 +619,17 @@ boolean playerPickedCard = false;
 						compareToPlayerCard = P1.hand.get(c);
 						compareToPlayerCardType = compareToPlayerCard.GetCardType();
 						
+						
 						// check if the type is the same
 						if (computerAskCardType == compareToPlayerCardType)
 						{
-							System.out.println("The card that computer wants to take: "+ P1.hand.get(c));
+							System.out.println("These are all of computers first cards " + Com.hand);
+							//System.out.println("The card that computer wants to take: "+ P1.hand.get(c));
 							Com.hand.add(P1.hand.get(c));
 							System.out.println("This is the card that the computer has taken: "+ P1.hand.get(c));
 							cardsToRemove.add(P1.hand.get(c));
+							//System.out.println("This is the card type "+ computerAskCard.GetCardType());
+							//System.out.println("These are all of computer cards after " + Com.hand);
 							lblComputerActions.setText("The computer has taken your " + compareToPlayerCardType);
 							
 							// To disable the button so the player can't ask for this card anymore
@@ -706,6 +704,7 @@ boolean playerPickedCard = false;
 						
 					}
 					
+					
 					// If player's hand doesn't have card then add card from deck
 					if (cardsToRemove.isEmpty())
 					{
@@ -718,12 +717,14 @@ boolean playerPickedCard = false;
 						Com.hand.add(newCard);
 					}
 					
+					
 					// Discard the cards
 					P1.hand.removeAll(cardsToRemove);
 					cardsToRemove.clear();
 					
 					// check points
 					Com.points = CheckComDoubles(Com.points);
+					
 					// This is so that buttons can be disabled
 					P1.points = CheckP1Doubles(P1.points);
 					
@@ -760,7 +761,7 @@ boolean playerPickedCard = false;
 					
 					
 				}
-				System.out.println("These are all of your cards " + P1.hand);
+				//System.out.println("These are all of computer cards " + Com.hand);
 				
 				
 				
@@ -778,8 +779,6 @@ boolean playerPickedCard = false;
 				int deckSize;
 				// For player turn
 				char playerAskCardType;
-				int playerHandSize;
-				Card playerAskCard;
 				Card compareToComputerCard;
 				char compareToComputerCardType;
 				
@@ -877,12 +876,9 @@ boolean playerPickedCard = false;
 		int playerPoints = previousPoints;
 		
 		// Local variables
-		boolean isGameOver;
 		boolean checkPlayer;
-		boolean startOver;
 		boolean justDidTwoCards = false;
 		int numberOfPlayerCards;
-		int deckSize;
 		
 		numberOfPlayerCards = (P1.hand.size());
 		checkPlayer = true;
@@ -1046,12 +1042,9 @@ boolean playerPickedCard = false;
 		int computerPoints = previousPoints;
 		
 		// Local variables
-		boolean isGameOver;
 		boolean checkPlayer;
-		boolean startOver;
 		boolean justDidTwoCards = false;
 		int numberOfComputerCards;
-		int deckSize;
 		
 		numberOfComputerCards = (Com.hand.size());
 		checkPlayer = true;
@@ -1061,12 +1054,15 @@ boolean playerPickedCard = false;
 			char typeY;
 			int x = -1;
 			int y = 0;
+			justDidTwoCards = false;
 			
 			//System.out.println("Hand size" + Com.hand.size());
 			
 			// Clear arrays 
 			cardsToRemove.clear();
 			cardTypes.clear();
+			
+			//System.out.println("Com Cards (Check com doubles) 1 " + Com.hand);
 		
 			System.out.println("Number of computer cards: " + numberOfComputerCards);
 			////
@@ -1076,11 +1072,10 @@ boolean playerPickedCard = false;
 				x = x+1;
 				y = 0;
 				y = x+1;
-				//System.out.println("X is " +x);
 				
-				//System.out.println("y =" + y);
 				while (y <= (numberOfComputerCards-1))
 				{
+					
 					if (justDidTwoCards == false)
 					{
 						cardX = Com.hand.get(x);
@@ -1089,6 +1084,8 @@ boolean playerPickedCard = false;
 						//System.out.println("typeX:" + typeX);
 						typeY = cardY.GetCardType();
 						//System.out.println("typeY:" + typeY);
+						
+
 						
 						
 						if (typeX == typeY)
@@ -1105,6 +1102,7 @@ boolean playerPickedCard = false;
 								cardTypes.add(typeX);
 								cardTypes.add(typeY);
 								Com.hand.trimToSize();
+
 								numberOfComputerCards = numberOfComputerCards -1;
 								//System.out.println("Hand size" + Com.hand.size());
 								// Need to make sure it still works
@@ -1137,8 +1135,10 @@ boolean playerPickedCard = false;
 				}
 				
 			}
+			//System.out.println("Com Cards (Check com doubles) 2 " + Com.hand);
 			
 			Com.hand.removeAll(cardsToRemove);
+			cardsToRemove.clear();
 			cardsToRemove.clear();
 			System.out.println("Computer points:" + computerPoints);
 		
