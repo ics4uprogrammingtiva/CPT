@@ -9,6 +9,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
+import java.awt.Color;
 
 /*
  * Created by: Tiva Rait
@@ -127,20 +128,27 @@ boolean playerPickedCard = false;
 		
 
 		JLabel lblTitle = new JLabel("GO Fish!");
+		lblTitle.setForeground(Color.PINK);
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblTitle.setBounds(315, 11, 232, 39);
 		frame.getContentPane().add(lblTitle);
 		
 		JLabel lblPlayerActions = new JLabel("Player Action's");
+		lblPlayerActions.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblPlayerActions.setForeground(Color.PINK);
 		lblPlayerActions.setBounds(604, 92, 263, 14);
 		frame.getContentPane().add(lblPlayerActions);
 		
 		JLabel lblP1Points = new JLabel("Player 1 Points : ");
+		lblP1Points.setForeground(Color.PINK);
+		lblP1Points.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblP1Points.setBounds(616, 315, 124, 14);
 		frame.getContentPane().add(lblP1Points);
 		
 		JLabel lblComPoints = new JLabel("Computer Points : ");
+		lblComPoints.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblComPoints.setForeground(Color.PINK);
 		lblComPoints.setBounds(612, 346, 144, 14);
 		frame.getContentPane().add(lblComPoints);
 		
@@ -148,8 +156,6 @@ boolean playerPickedCard = false;
 		// Ace
 		cardSlotA.setBounds(10, 79, 89, 112);
 		cardSlotA.setHorizontalAlignment(SwingConstants.CENTER);
-		// This is going to be put in the location of where the image is displayed 
-		//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("CardsVF/AC.jpg")));
 		frame.getContentPane().add(cardSlotA);
 		
 		btnAskForA.addActionListener(new ActionListener() {
@@ -469,6 +475,8 @@ boolean playerPickedCard = false;
 		btnAskForK.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskForK.setBounds(604, 148, 89, 23);
 		frame.getContentPane().add(btnAskForK);
+		lblComputerActions.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblComputerActions.setForeground(Color.PINK);
 		
 		lblComputerActions.setBounds(604, 48, 263, 14);
 		frame.getContentPane().add(lblComputerActions);
@@ -539,7 +547,6 @@ boolean playerPickedCard = false;
 					Com.hand.add(newCard);
 					
 				}
-				
 				
 				
 				// Then have an end turn button to do everthing until the end of the game 
@@ -746,9 +753,6 @@ boolean playerPickedCard = false;
 						// Disable this button
 						btnEndTurn.setEnabled(false);
 						
-						
-					
-						
 					}
 					// Display the Player and the computers points
 					lblP1Points.setText("Player 1 Points : " + P1.points);
@@ -823,8 +827,6 @@ boolean playerPickedCard = false;
 							lblPlayerActions.setText("You have taken a " + compareToComputerCardType + " from the computer");
 							
 						}
-						
-						
 					}
 					
 					// If computers's hand doesn't have card then add card from deck
@@ -860,6 +862,11 @@ boolean playerPickedCard = false;
 		btnAsk.setBounds(171, 557, 126, 23);
 		frame.getContentPane().add(btnAsk);
 		
+		JLabel lblBackground = new JLabel("New label");
+		lblBackground.setBounds(0, 0, 877, 608);
+		lblBackground.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("CardsVF/Background.JPG")));
+		frame.getContentPane().add(lblBackground);
+		
 		
 
 	}
@@ -886,8 +893,6 @@ boolean playerPickedCard = false;
 			int x = -1;
 			int y = 0;
 			
-			////
-			
 			// Clear arrays 
 			cardsToRemove.clear();
 			cardTypes.clear();
@@ -895,7 +900,6 @@ boolean playerPickedCard = false;
 			
 			while (checkPlayer == true)
 			{
-
 				x = x+1;
 				y = 0;
 				y = x+1;
@@ -912,7 +916,6 @@ boolean playerPickedCard = false;
 						//System.out.println("typeX:" + typeX);
 						typeY = cardY.GetCardType();
 						//System.out.println("typeY:" + typeY);
-						
 						
 						if (typeX == typeY)
 						{
@@ -1002,11 +1005,7 @@ boolean playerPickedCard = false;
 								//System.out.println("I continue to work after two cards");
 									justDidTwoCards = true;
 							}
-							
-
 						}
-					
-
 					}
 					if (x > numberOfPlayerCards-1)
 					{
@@ -1252,7 +1251,7 @@ boolean playerPickedCard = false;
 	// To figure out who has won
 	public void CountPoints()
 	{
-		// Disable all buttons 
+		// To determine who had more points or if it is a tie
 		if (Com.points> P1.points)
 		{
 			System.out.println("Computer Wins!");
