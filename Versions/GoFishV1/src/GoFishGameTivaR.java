@@ -9,7 +9,6 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dimension;
-import javax.swing.ImageIcon;
 
 /*
  * Created by: Tiva Rait
@@ -18,6 +17,7 @@ import javax.swing.ImageIcon;
  * CPT
  * This is a game of Go Fish
 */
+
 
 public class GoFishGameTivaR {
 
@@ -66,48 +66,54 @@ ArrayList <Character> cardTypes = new ArrayList();
 Player P1 = new Player();
 Player Com = new Player();
 
+// Simple global variables
+char cardPlayerAsksFor;
+boolean playerPickedCard = false;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// All of the labels and buttons 
 		JLabel cardSlotA = new JLabel();
-		JButton btnAskForA = new JButton("Ask For Ace");
+		JButton btnAskForA = new JButton("Ace");
 		
 		JLabel cardSlot2 = new JLabel();
-		JButton btnAskFor2 = new JButton("Ask For 2");
+		JButton btnAskFor2 = new JButton("2");
 		
 		JLabel cardSlot3 = new JLabel();
-		JButton btnAskFor3 = new JButton("Ask For 3");
+		JButton btnAskFor3 = new JButton("3");
 		
 		JLabel cardSlot4 = new JLabel();
-		JButton btnAskFor4 = new JButton("Ask For 4");
+		JButton btnAskFor4 = new JButton("4");
 		
 		JLabel cardSlot5 = new JLabel();
-		JButton btnAskFor5 = new JButton("Ask For 5");
+		JButton btnAskFor5 = new JButton("5");
 		
 		JLabel cardSlot6 = new JLabel();
-		JButton btnAskFor6 = new JButton("Ask For 6");
+		JButton btnAskFor6 = new JButton("6");
 		
 		JLabel cardSlot7 = new JLabel();
-		JButton btnAskFor7 = new JButton("Ask For 7");
+		JButton btnAskFor7 = new JButton("7");
 		
 		JLabel cardSlot8 = new JLabel();
-		JButton btnAskFor8 = new JButton("Ask For 8");
+		JButton btnAskFor8 = new JButton("8");
 		
 		JLabel cardSlot9 = new JLabel();
-		JButton btnAskFor9 = new JButton("Ask For 9");
+		JButton btnAskFor9 = new JButton("9");
 		
 		JLabel cardSlot10 = new JLabel();
-		JButton btnAskFor10 = new JButton("Ask For 10");
+		JButton btnAskFor10 = new JButton("10");
 		
 		JLabel cardSlotJ = new JLabel();
-		JButton btnAskForJ = new JButton("Ask For Jack");
+		JButton btnAskForJ = new JButton("Jack");
 		
 		JLabel cardSlotQ = new JLabel();
-		JButton btnAskForQ = new JButton("Ask For Queen");
+		JButton btnAskForQ = new JButton("Queen");
 		
 		JLabel cardSlotK = new JLabel();
-		JButton btnAskForK = new JButton("Ask For King");
+		JButton btnAskForK = new JButton("King");
 		
 		JLabel lblComputerActions = new JLabel("Computer's Actions");
+		
+		JButton btnAsk = new JButton("Ask for Card");
 		
 	/**
 	 * Initialize the contents of the frame.
@@ -126,21 +132,40 @@ Player Com = new Player();
 		lblTitle.setBounds(315, 11, 232, 39);
 		frame.getContentPane().add(lblTitle);
 		
+		JLabel lblPlayerActions = new JLabel("Player Action's");
+		lblPlayerActions.setBounds(604, 92, 263, 14);
+		frame.getContentPane().add(lblPlayerActions);
+		
+		JLabel lblP1Points = new JLabel("Player 1 Points : ");
+		lblP1Points.setBounds(616, 315, 124, 14);
+		frame.getContentPane().add(lblP1Points);
+		
+		JLabel lblComPoints = new JLabel("Computer Points : ");
+		lblComPoints.setBounds(612, 346, 144, 14);
+		frame.getContentPane().add(lblComPoints);
+		
 		// Image Slots information and set up 
 		// Ace
 		cardSlotA.setBounds(10, 79, 89, 112);
 		cardSlotA.setHorizontalAlignment(SwingConstants.CENTER);
 		// This is going to be put in the location of where the image is displayed 
-		//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("src/CardsVF/AC.jpg")));
+		//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource("CardsVF/AC.jpg")));
 		frame.getContentPane().add(cardSlotA);
 		
 		btnAskForA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = 'A';
+					playerPickedCard = true;
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskForA.setEnabled(false);
 		btnAskForA.setBorderPainted(false);
-		btnAskForA.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnAskForA.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskForA.setBounds(10, 45, 89, 23);
 		frame.getContentPane().add(btnAskForA);
 		
@@ -152,11 +177,19 @@ Player Com = new Player();
 		
 		btnAskFor2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '2';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor2.setBorderPainted(false);
 		btnAskFor2.setEnabled(false);
-		btnAskFor2.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor2.setBounds(109, 45, 89, 23);
 		frame.getContentPane().add(btnAskFor2);
 		
@@ -169,11 +202,19 @@ Player Com = new Player();
 		
 		btnAskFor3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '3';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor3.setBorderPainted(false);
 		btnAskFor3.setEnabled(false);
-		btnAskFor3.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor3.setBounds(208, 45, 89, 23);
 		frame.getContentPane().add(btnAskFor3);
 		
@@ -186,11 +227,19 @@ Player Com = new Player();
 		
 		btnAskFor4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '4';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor4.setBorderPainted(false);
 		btnAskFor4.setEnabled(false);
-		btnAskFor4.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor4.setBounds(307, 45, 89, 23);
 		frame.getContentPane().add(btnAskFor4);
 		
@@ -203,11 +252,19 @@ Player Com = new Player();
 		
 		btnAskFor5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '5';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor5.setBorderPainted(false);
 		btnAskFor5.setEnabled(false);
-		btnAskFor5.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor5.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor5.setBounds(406, 45, 89, 23);
 		frame.getContentPane().add(btnAskFor5);
 		
@@ -220,51 +277,75 @@ Player Com = new Player();
 		
 		btnAskFor6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '6';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor6.setBorderPainted(false);
 		btnAskFor6.setEnabled(false);
-		btnAskFor6.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor6.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor6.setBounds(505, 45, 89, 23);
 		frame.getContentPane().add(btnAskFor6);
 		
 		
 		// 7
-		cardSlot7.setBounds(10, 197, 89, 112);
+		cardSlot7.setBounds(10, 259, 89, 112);
 		cardSlot7.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlot7.setVisible(false);
 		frame.getContentPane().add(cardSlot7);
 		
 		btnAskFor7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '7';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor7.setBorderPainted(false);
 		btnAskFor7.setEnabled(false);
-		btnAskFor7.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor7.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor7.setBounds(10, 226, 89, 23);
 		frame.getContentPane().add(btnAskFor7);
 		
 		
 		// 8
-		cardSlot8.setBounds(109, 197, 89, 112);
+		cardSlot8.setBounds(109, 259, 89, 112);
 		cardSlot8.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlot8.setVisible(false);
 		frame.getContentPane().add(cardSlot8);
 		
 		btnAskFor8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '8';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor8.setBorderPainted(false);
 		btnAskFor8.setEnabled(false);
-		btnAskFor8.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor8.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor8.setBounds(109, 226, 89, 23);
 		frame.getContentPane().add(btnAskFor8);
 		
 		
 		//9
-		cardSlot9.setBounds(208, 197, 89, 112);
+		cardSlot9.setBounds(208, 259, 89, 112);
 		cardSlot9.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlot9.setVisible(false);
 		frame.getContentPane().add(cardSlot9);
@@ -272,62 +353,94 @@ Player Com = new Player();
 		
 		btnAskFor9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '9';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor9.setBorderPainted(false);
 		btnAskFor9.setEnabled(false);
-		btnAskFor9.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor9.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor9.setBounds(208, 226, 89, 23);
 		frame.getContentPane().add(btnAskFor9);
 		
 		
 		// 10
-		cardSlot10.setBounds(307, 197, 89, 112);
+		cardSlot10.setBounds(307, 259, 89, 112);
 		cardSlot10.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlot10.setVisible(false);
 		frame.getContentPane().add(cardSlot10);
 		
 		btnAskFor10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = '0';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskFor10.setBorderPainted(false);
 		btnAskFor10.setEnabled(false);
-		btnAskFor10.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnAskFor10.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskFor10.setBounds(307, 226, 89, 23);
 		frame.getContentPane().add(btnAskFor10);
 		
 		
 		// J
-		cardSlotJ.setBounds(406, 197, 89, 112);
+		cardSlotJ.setBounds(406, 259, 89, 112);
 		cardSlotJ.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlotJ.setVisible(false);
 		frame.getContentPane().add(cardSlotJ);
 		
 		btnAskForJ.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = 'J';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskForJ.setBorderPainted(false);
 		btnAskForJ.setEnabled(false);
-		btnAskForJ.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnAskForJ.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskForJ.setBounds(406, 226, 89, 23);
 		frame.getContentPane().add(btnAskForJ);
 		
 		
 		//Q
-		cardSlotQ.setBounds(505, 197, 89, 112);
+		cardSlotQ.setBounds(505, 259, 89, 112);
 		cardSlotQ.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSlotQ.setVisible(false);
 		frame.getContentPane().add(cardSlotQ);
 		
 		btnAskForQ.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = 'Q';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskForQ.setBorderPainted(false);
 		btnAskForQ.setEnabled(false);
-		btnAskForQ.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnAskForQ.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskForQ.setBounds(505, 226, 89, 23);
 		frame.getContentPane().add(btnAskForQ);
 		
@@ -341,18 +454,27 @@ Player Com = new Player();
 		
 		btnAskForK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// To set the card that the user wants to ask for
+				if (playerPickedCard == false)
+				{
+					cardPlayerAsksFor = 'K';
+					playerPickedCard = true;
+					
+					btnAsk.setEnabled(true);
+				}
 			}
 		});
 		btnAskForK.setBorderPainted(false);
 		btnAskForK.setEnabled(false);
-		btnAskForK.setFont(new Font("Tahoma", Font.PLAIN, 8));
+		btnAskForK.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnAskForK.setBounds(604, 148, 89, 23);
 		frame.getContentPane().add(btnAskForK);
 		
-
-		lblComputerActions.setVisible(false);
 		lblComputerActions.setBounds(604, 48, 263, 14);
 		frame.getContentPane().add(lblComputerActions);
+		
+		// Continuing buttons
+		JButton btnEndTurn = new JButton("End Turn");
 		
 		// Button to start the game
 		JButton btnStartGame = new JButton("Start Game");
@@ -384,9 +506,14 @@ Player Com = new Player();
 				btnAskForJ.setEnabled(false);
 				btnAskForQ.setEnabled(false);
 				btnAskForK.setEnabled(false);
+				
+				btnEndTurn.setEnabled(true);
+				lblComputerActions.setText("End Your Turn");
+				lblPlayerActions.setText("End Your Turn");
 
 				System.out.println("Step one");
 				
+				// create the deck
 				Pool.CreateDeck();
 				
 				
@@ -396,7 +523,7 @@ Player Com = new Player();
 					deckSize = Pool.deck.size();
 					// Deal a card to the player's hand
 					Card newCard = Pool.GivePlayerCard(deckSize);
-					System.out.println("Original cards:" + newCard.GetCardType());
+					System.out.println("Original Player cards:" + newCard.GetCardType());
 					P1.hand.add(newCard);
 					
 					
@@ -408,10 +535,12 @@ Player Com = new Player();
 					deckSize = Pool.deck.size();
 					// Deal a card to the computer's hand
 					Card newCard = Pool.GivePlayerCard(deckSize);
-					
+					System.out.println("Original computer cards:" + newCard.GetCardType());
 					Com.hand.add(newCard);
 					
 				}
+				
+				
 				
 				// Then have an end turn button to do everthing until the end of the game 
 				
@@ -423,13 +552,19 @@ Player Com = new Player();
 				System.out.println("Step two");
 				///////// DOUBLES
 				// Check for doubles for player
-				P1.points = CheckP1Doubles();
+				P1.points = CheckP1Doubles(P1.points);
 					
 				// Check the computers hand 
-				Com.points = CheckComDoubles();
+				Com.points = CheckComDoubles(Com.points);
+				
+				// Display the Player and the computers points
+				lblP1Points.setText("Player 1 Points : " + P1.points);
+				lblComPoints.setText("Computer Points : " + Com.points);
 					
 				// Display Players cards 
 				DisplayPlayerCards();
+				
+				lblPlayerActions.setText("Player Actions");
 				
 					
 			}
@@ -437,10 +572,12 @@ Player Com = new Player();
 		btnStartGame.setBounds(10, 11, 124, 23);
 		frame.getContentPane().add(btnStartGame);
 		
-		JButton btnEndTurn = new JButton("End Turn");
+		// This starts the computer's turn
+		btnEndTurn.setEnabled(false);
 		btnEndTurn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Variables
+				int deckSize;
 				// For computer turn
 				char computerAskCardType;
 				int computerHandSize;
@@ -448,15 +585,16 @@ Player Com = new Player();
 				Card compareToPlayerCard;
 				char compareToPlayerCardType;
 				
-				// For player turn
+				cardsToRemove.clear();
+				
 				
 				// If the user has zero cards then call the end game function
 				// End game function ends the game disables buttons and checks to see who wins
-				if (Com.points == 0)
+				if (Com.hand.size() == 0)
 				{
 					CountPoints();
 				}
-				else if (P1.points == 0)
+				else if (P1.hand.size() == 0)
 				{
 					CountPoints();
 				}
@@ -474,7 +612,7 @@ Player Com = new Player();
 					lblComputerActions.setText("The computer has asked for a " + computerAskCardType);
 					
 					// If the playerHand has a card type of the same then remove card from player's hand and add it to computer
-					for (int c = 0; c <= P1.hand.size(); c++)
+					for (int c = 0; c <= P1.hand.size()-1; c++)
 					{
 						// Variables for loop
 						compareToPlayerCard = P1.hand.get(c);
@@ -483,31 +621,142 @@ Player Com = new Player();
 						// check if the type is the same
 						if (computerAskCardType == compareToPlayerCardType)
 						{
+							System.out.println("The card that computer wants to take: "+ P1.hand.get(c));
 							Com.hand.add(P1.hand.get(c));
+							System.out.println("This is the card that the computer has taken: "+ P1.hand.get(c));
 							cardsToRemove.add(P1.hand.get(c));
+							lblComputerActions.setText("The computer has taken your " + compareToPlayerCardType);
+							
+							// To disable the button so the player can't ask for this card anymore
+							if (compareToPlayerCardType == 'A')
+							{
+								btnAskForA.setEnabled(false);
+								cardSlotA.setVisible(false);
+
+							}
+							else if (compareToPlayerCardType == '2')
+							{
+								btnAskFor2.setEnabled(false);
+								cardSlot2.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '3')
+							{
+								btnAskFor3.setEnabled(false);
+								cardSlot3.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '4')
+							{
+								btnAskFor4.setEnabled(false);
+								cardSlot4.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '5')
+							{
+								btnAskFor5.setEnabled(false);
+								cardSlot5.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '6')
+							{
+								btnAskFor6.setEnabled(false);
+								cardSlot6.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '7')
+							{
+								btnAskFor7.setEnabled(false);
+								cardSlot7.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '8')
+							{
+								btnAskFor8.setEnabled(false);
+								cardSlot8.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '9')
+							{
+								btnAskFor9.setEnabled(false);
+								cardSlot9.setVisible(false);
+							}
+							else if (compareToPlayerCardType == '0')
+							{
+								btnAskFor10.setEnabled(false);
+								cardSlot10.setVisible(false);
+							}
+							else if (compareToPlayerCardType == 'J')
+							{
+								btnAskForJ.setEnabled(false);
+								cardSlotJ.setVisible(false);
+							}
+							else if (compareToPlayerCardType == 'Q')
+							{
+								btnAskForQ.setEnabled(false);
+								cardSlotQ.setVisible(false);
+							}
+							else if (compareToPlayerCardType == 'K')
+							{
+								btnAskForK.setEnabled(false);
+								cardSlotK.setVisible(false);
+							}
 						}
-						// HERE
-						/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+						
 						
 					}
 					
 					// If player's hand doesn't have card then add card from deck
+					if (cardsToRemove.isEmpty())
+					{
+						// Get a card from the pool
+						deckSize = Pool.deck.size();
+						// Deal a card to the computer's hand
+						Card newCard = Pool.GivePlayerCard(deckSize);
+						System.out.println("Player doesn't have card so I take from pool");
+						
+						Com.hand.add(newCard);
+					}
 					
-					// Check for doubles of any card type
+					// Discard the cards
+					P1.hand.removeAll(cardsToRemove);
+					cardsToRemove.clear();
 					
-					// after
+					// check points
+					Com.points = CheckComDoubles(Com.points);
+					// This is so that buttons can be disabled
+					P1.points = CheckP1Doubles(P1.points);
+					
+					// Display the Player and the computers points
+					lblP1Points.setText("Player 1 Points : " + P1.points);
+					lblComPoints.setText("Computer Points : " + Com.points);
+					
+					///////////////////////////////
+					// Start The player's turn
+					///////////////////////////////
+					// Allow the user to ask for a new card 
+					playerPickedCard = false;
 					
 					// If user has zero cards call end game function (See above)
+					if (P1.hand.size() == 0)
+					{
+						CountPoints();
+					}
+					else if (Com.hand.size() == 0)
+					{
+						CountPoints();
+					}
+					else
+					{
 					
 					// Allow player to select a card from their hand 
-					// Enable all of the buttons of cards currently in the users hand
+						// Disable this button
+						btnEndTurn.setEnabled(false);
+						
+						
 					
-					// If computer hand has a card type of the same then add card to player's hand
-					
-					// If computer's hand  doesn't have card then add card from deck
+						
+					}
+					// Display the Player and the computers points
+					lblP1Points.setText("Player 1 Points : " + P1.points);
+					lblComPoints.setText("Computer Points : " + Com.points);
 					
 					
 				}
+				System.out.println("These are all of your cards " + P1.hand);
 				
 				
 				
@@ -516,13 +765,109 @@ Player Com = new Player();
 		btnEndTurn.setBounds(10, 557, 124, 23);
 		frame.getContentPane().add(btnEndTurn);
 		
+		// This starts the player's turn
+		btnAsk.setEnabled(false);
+		btnAsk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Local Variables
+				// Variables
+				int deckSize;
+				// For player turn
+				char playerAskCardType;
+				int playerHandSize;
+				Card playerAskCard;
+				Card compareToComputerCard;
+				char compareToComputerCardType;
+				
+				cardsToRemove.clear();
+				
+				// Enable End Turn & disable Ask 
+				btnAsk.setEnabled(false);
+				
+				if (Com.hand.size() == 0)
+				{
+					CountPoints();
+				}
+				else if (P1.hand.size() == 0)
+				{
+					CountPoints();
+				}
+				else
+				{
+					// Get the card type
+					playerAskCardType = GetCardTypeFromButton();
+					System.out.println("I didn't break");
+					System.out.println("playerAskCardType: " + playerAskCardType);
+					
+					// Enable all of the buttons of cards currently in the users hand
+					btnEndTurn.setEnabled(true);
+					DisplayPlayerCards();
+					
+					
+					// If computer hand has a card type of the same then add card to player's hand
+					// If the playerHand has a card type of the same then remove card from computer's hand and give it to the player
+					for (int c = 0; c <= Com.hand.size()-1; c++)
+					{
+						// Variables for loop
+						compareToComputerCard = Com.hand.get(c);
+						compareToComputerCardType = compareToComputerCard.GetCardType();
+						
+						// check if the type is the same
+						if (playerAskCardType == compareToComputerCardType)
+						{
+							System.out.println("The card that you want to take: "+ Com.hand.get(c));
+							P1.hand.add(Com.hand.get(c));
+							System.out.println("This is the card that you have taken: "+ Com.hand.get(c));
+							cardsToRemove.add(Com.hand.get(c));
+							
+							lblPlayerActions.setText("You have taken a " + compareToComputerCardType + " from the computer");
+							
+						}
+						
+						
+					}
+					
+					// If computers's hand doesn't have card then add card from deck
+					if (cardsToRemove.isEmpty())
+					{
+						// Get a card from the pool
+						deckSize = Pool.deck.size();
+						// Deal a card to the player's hand
+						Card newCard = Pool.GivePlayerCard(deckSize);
+						System.out.println("Computer doesn't have card so I take from pool");
+						
+						P1.hand.add(newCard);
+						
+						// Tell the player what card they got 
+						lblPlayerActions.setText("You picked up a " + newCard.GetCardType() + " from the deck");
+					}
+					
+					Com.hand.removeAll(cardsToRemove);
+					cardsToRemove.clear();
+					
+					// Check who has the most points
+					P1.points = CheckP1Doubles(P1.points);
+				}
+				
+				// Display the Player and the computers points
+				lblP1Points.setText("Player 1 Points : " + P1.points);
+				lblComPoints.setText("Computer Points : " + Com.points);
+				
+				DisplayPlayerCards();
+				
+			}
+		});
+		btnAsk.setBounds(171, 557, 126, 23);
+		frame.getContentPane().add(btnAsk);
+		
 		
 
 	}
 	
-	public int CheckP1Doubles()
+	// This checks if the player has doubles
+	public int CheckP1Doubles(int previousPoints)
 	{
-		int playerPoints = 0;
+		int playerPoints = previousPoints;
 		
 		// Local variables
 		boolean isGameOver;
@@ -541,24 +886,22 @@ Player Com = new Player();
 			int x = -1;
 			int y = 0;
 			
-			System.out.println("Hand size" + P1.hand.size());
 			////
 			
 			// Clear arrays 
 			cardsToRemove.clear();
 			cardTypes.clear();
-			
+			System.out.println("Number of player cards: " + numberOfPlayerCards);
 			
 			while (checkPlayer == true)
 			{
-				System.out.println("Inside the loop");
 
 				x = x+1;
 				y = 0;
 				y = x+1;
-				System.out.println("X is " +x);
-				System.out.println("Number of player cards: " + numberOfPlayerCards);
-				System.out.println("y =" + y);
+				//System.out.println("X is " +x);
+
+				//System.out.println("y =" + y);
 				while (y <= (numberOfPlayerCards-1))
 				{
 					if (justDidTwoCards == false)
@@ -566,9 +909,9 @@ Player Com = new Player();
 						cardX = P1.hand.get(x);
 						cardY = P1.hand.get(y);
 						typeX = cardX.GetCardType();
-						System.out.println("typeX:" + typeX);
+						//System.out.println("typeX:" + typeX);
 						typeY = cardY.GetCardType();
-						System.out.println("typeY:" + typeY);
+						//System.out.println("typeY:" + typeY);
 						
 						
 						if (typeX == typeY)
@@ -586,77 +929,77 @@ Player Com = new Player();
 								cardTypes.add(typeY);
 								P1.hand.trimToSize();
 								numberOfPlayerCards = numberOfPlayerCards -1;
-								System.out.println("Hand size" + P1.hand.size());
+								//System.out.println("Hand size" + P1.hand.size());
 								
 								// Disable the option for selecting the card to ask for
-								if (typeX == 'A')
+								if (typeX == 'A' || typeY == 'A')
 								{
 									btnAskForA.setEnabled(false);
 									cardSlotA.setVisible(false);
 
 								}
-								else if (typeX == '2')
+								else if (typeX == '2' || typeY == '2')
 								{
 									btnAskFor2.setEnabled(false);
 									cardSlot2.setVisible(false);
 								}
-								else if (typeX == '3')
+								else if (typeX == '3' || typeY == '3')
 								{
 									btnAskFor3.setEnabled(false);
 									cardSlot3.setVisible(false);
 								}
-								else if (typeX == '4')
+								else if (typeX == '4' || typeY == '4')
 								{
 									btnAskFor4.setEnabled(false);
 									cardSlot4.setVisible(false);
 								}
-								else if (typeX == '5')
+								else if (typeX == '5' || typeY == '5')
 								{
 									btnAskFor5.setEnabled(false);
 									cardSlot5.setVisible(false);
 								}
-								else if (typeX == '6')
+								else if (typeX == '6' || typeY == '6')
 								{
 									btnAskFor6.setEnabled(false);
 									cardSlot6.setVisible(false);
 								}
-								else if (typeX == '7')
+								else if (typeX == '7' || typeY == '7')
 								{
 									btnAskFor7.setEnabled(false);
 									cardSlot7.setVisible(false);
 								}
-								else if (typeX == '8')
+								else if (typeX == '8' || typeY == '8')
 								{
 									btnAskFor8.setEnabled(false);
 									cardSlot8.setVisible(false);
 								}
-								else if (typeX == '9')
+								else if (typeX == '9' || typeY == '9')
 								{
 									btnAskFor9.setEnabled(false);
 									cardSlot9.setVisible(false);
 								}
-								else if (typeX == '0')
+								else if (typeX == '0' || typeY == '0')
 								{
 									btnAskFor10.setEnabled(false);
 									cardSlot10.setVisible(false);
 								}
-								else if (typeX == 'J')
+								else if (typeX == 'J' || typeY == 'J')
 								{
 									btnAskForJ.setEnabled(false);
 									cardSlotJ.setVisible(false);
 								}
-								else if (typeX == 'Q')
+								else if (typeX == 'Q' || typeY == 'Q')
 								{
 									btnAskForQ.setEnabled(false);
 									cardSlotQ.setVisible(false);
 								}
-								else if (typeX == 'K')
+								else if (typeX == 'K' || typeY == 'K')
 								{
 									btnAskForK.setEnabled(false);
 									cardSlotK.setVisible(false);
 								}
 								// Need to make sure it still works
-								System.out.println("I continue to work after two cards");
+								//System.out.println("I continue to work after two cards");
 									justDidTwoCards = true;
 							}
 							
@@ -672,7 +1015,7 @@ Player Com = new Player();
 					if (y >= numberOfPlayerCards-1)
 					{
 						//checkPlayer = false;
-						System.out.println("Help");
+						//System.out.println("Help");
 					}
 
 					y= y+1;
@@ -690,13 +1033,18 @@ Player Com = new Player();
 			cardsToRemove.clear();
 			cardsToRemove.clear();
 			System.out.println("Player points:" + playerPoints);
+			
+			
+			
+			//// Add a Label here to show who is winning 
 		
 		return (playerPoints);
 	}
 	
-	public int CheckComDoubles()
+	// This checks if the computer has doubles
+	public int CheckComDoubles(int previousPoints)
 	{
-		int computerPoints = 0;
+		int computerPoints = previousPoints;
 		
 		// Local variables
 		boolean isGameOver;
@@ -715,23 +1063,23 @@ Player Com = new Player();
 			int x = -1;
 			int y = 0;
 			
-			System.out.println("Hand size" + Com.hand.size());
+			//System.out.println("Hand size" + Com.hand.size());
 			
 			// Clear arrays 
 			cardsToRemove.clear();
 			cardTypes.clear();
 		
+			System.out.println("Number of computer cards: " + numberOfComputerCards);
 			////
 			while (checkPlayer == true)
 			{
-				System.out.println("Inside the loop");
 
 				x = x+1;
 				y = 0;
 				y = x+1;
-				System.out.println("X is " +x);
-				System.out.println("Number of player cards: " + numberOfComputerCards);
-				System.out.println("y =" + y);
+				//System.out.println("X is " +x);
+				
+				//System.out.println("y =" + y);
 				while (y <= (numberOfComputerCards-1))
 				{
 					if (justDidTwoCards == false)
@@ -739,9 +1087,9 @@ Player Com = new Player();
 						cardX = Com.hand.get(x);
 						cardY = Com.hand.get(y);
 						typeX = cardX.GetCardType();
-						System.out.println("typeX:" + typeX);
+						//System.out.println("typeX:" + typeX);
 						typeY = cardY.GetCardType();
-						System.out.println("typeY:" + typeY);
+						//System.out.println("typeY:" + typeY);
 						
 						
 						if (typeX == typeY)
@@ -759,9 +1107,9 @@ Player Com = new Player();
 								cardTypes.add(typeY);
 								Com.hand.trimToSize();
 								numberOfComputerCards = numberOfComputerCards -1;
-								System.out.println("Hand size" + Com.hand.size());
+								//System.out.println("Hand size" + Com.hand.size());
 								// Need to make sure it still works
-								System.out.println("I continue to work after two cards");
+								//System.out.println("I continue to work after two cards");
 									justDidTwoCards = true;
 							}
 							
@@ -777,7 +1125,7 @@ Player Com = new Player();
 					if (y >= numberOfComputerCards-1)
 					{
 						//checkPlayer = false;
-						System.out.println("Help");
+						//System.out.println("Help");
 					}
 
 					y= y+1;
@@ -791,13 +1139,14 @@ Player Com = new Player();
 				
 			}
 			
-			P1.hand.removeAll(cardsToRemove);
+			Com.hand.removeAll(cardsToRemove);
 			cardsToRemove.clear();
 			System.out.println("Computer points:" + computerPoints);
 		
 		return (computerPoints);
 	}
 	
+	// This Displays the Player's Cards in the card slots
 	public void DisplayPlayerCards ()
 	{
 		// Local variables
@@ -819,79 +1168,79 @@ Player Com = new Player();
 		
 		if (currentDisplayType == 'A')
 		{
-			//cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlotA.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForA.setEnabled(true);
 			cardSlotA.setVisible(true);
 		}
 		else if (currentDisplayType == '2')
 		{
-			//cardSlot2.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot2.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor2.setEnabled(true);
 			cardSlot2.setVisible(true);
 		}
 		else if (currentDisplayType == '3')
 		{
-			//cardSlot3.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot3.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor3.setEnabled(true);
 			cardSlot3.setVisible(true);
 		}
 		else if (currentDisplayType == '4')
 		{
-			//cardSlot4.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot4.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor4.setEnabled(true);
 			cardSlot4.setVisible(true);
 		}
 		else if (currentDisplayType == '5')
 		{
-			//cardSlot5.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot5.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor5.setEnabled(true);
 			cardSlot5.setVisible(true);
 		}
 		else if (currentDisplayType == '6')
 		{
-			//cardSlot6.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot6.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor6.setEnabled(true);
 			cardSlot6.setVisible(true);
 		}
 		else if (currentDisplayType == '7')
 		{
-			//cardSlot7.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot7.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor7.setEnabled(true);
 			cardSlot7.setVisible(true);
 		}
 		else if (currentDisplayType == '8')
 		{
-			//cardSlot8.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot8.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor8.setEnabled(true);
 			cardSlot8.setVisible(true);
 		}
 		else if (currentDisplayType == '9')
 		{
-			//cardSlot9.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot9.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor9.setEnabled(true);
 			cardSlot9.setVisible(true);
 		}
 		else if (currentDisplayType == '0')
 		{
-			//cardSlot10.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlot10.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskFor10.setEnabled(true);
 			cardSlot10.setVisible(true);
 		}
 		else if (currentDisplayType == 'J')
 		{
-			//cardSlotJ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlotJ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForJ.setEnabled(true);
 			cardSlotJ.setVisible(true);
 		}
 		else if (currentDisplayType == 'Q')
 		{
-			//cardSlotQ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlotQ.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForQ.setEnabled(true);
 			cardSlotQ.setVisible(true);
 		}
 		else if (currentDisplayType == 'K')
 		{
-			//cardSlotK.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
+			cardSlotK.setIcon(new ImageIcon(GoFishGameTivaR.class.getResource(currentImage)));
 			btnAskForK.setEnabled(true);
 			cardSlotK.setVisible(true);
 		}
@@ -900,7 +1249,7 @@ Player Com = new Player();
 		
 	}
 	}
-	
+	// To figure out who has won
 	public void CountPoints()
 	{
 		// Disable all buttons 
@@ -920,6 +1269,18 @@ Player Com = new Player();
 			System.out.println("It's a tie!");
 			lblComputerActions.setText("You both tied.");
 		}
+		
+		
+	}
+	// Function to get the card types from the buttons
+	public char GetCardTypeFromButton()
+	{
+		char cardType;
+		
+		cardType = cardPlayerAsksFor;
+		
+		
+		return (cardType);
 	}
 }
 
