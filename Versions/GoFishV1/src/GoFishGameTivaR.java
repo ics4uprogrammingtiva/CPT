@@ -61,7 +61,7 @@ ArrayList <Card> cardDeck = new ArrayList <>();
 // Cards to remove
 ArrayList <Card> cardsToRemove = new ArrayList<>();
 
-ArrayList <Character> cardTypes = new ArrayList();
+ArrayList <Character> cardTypes = new ArrayList<Character>();
 
 // Set up player and computer 
 Player P1 = new Player();

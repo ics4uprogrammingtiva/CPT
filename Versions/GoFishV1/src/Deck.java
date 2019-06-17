@@ -6,14 +6,10 @@ public class Deck {
 	ArrayList <Card> deck = new ArrayList <>();
 	
 	// Don't know what this does but my code doesn't work without it
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
-	}
 	
 	
-	public ArrayList CreateDeck ()
+	
+	public ArrayList<Card> CreateDeck ()
 	{
 		// First card template
 				Card cardAH = new Card();
